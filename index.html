@@ -9,7 +9,7 @@
 <body>
   <button id="muteBtn" class="float-audio" aria-label="Toggle sound">🔊</button>
   <main class="app">
-    <section id="homeScreen" class="screen active home">
+    <section id="homeScreen" class="screen active home-screen">
       <div class="home-card">
         <div class="logo">✎</div>
         <p class="eyebrow">quick doodle memory game</p>
@@ -17,58 +17,61 @@
         <p class="tagline">Can you remember what your own doodles mean?</p>
         <p class="mini">Draw fast. Remember later.</p>
         <div class="difficulty" id="difficultyPanel">
-          <button data-difficulty="easy">Easy <span>slower</span></button>
-          <button data-difficulty="normal" class="selected">Normal <span>balanced</span></button>
-          <button data-difficulty="hard">Hard <span>faster</span></button>
+          <button type="button" data-difficulty="easy">Easy <span>clear + slower</span></button>
+          <button type="button" data-difficulty="normal" class="selected">Normal <span>balanced</span></button>
+          <button type="button" data-difficulty="hard">Hard <span>quick</span></button>
         </div>
-        <button id="startBtn" class="primary">Start Game</button>
+        <button id="startBtn" class="primary" type="button">Start Game</button>
         <div class="stats">
           <div><b id="gamesPlayed">0</b><small>Games Played</small></div>
-          <div><b id="bestScore">0</b><small>Best Score</small></div>
-          <div><b id="averageScore">0</b><small>Average Score</small></div>
+          <div><b id="bestScore">0 / 10</b><small>Best Score</small></div>
+          <div><b id="averageScore">0%</b><small>Average Score</small></div>
         </div>
       </div>
     </section>
 
-    <section id="countdownScreen" class="screen countdown"><div id="countdownText">3</div></section>
+    <section id="countdownScreen" class="screen countdown-screen"><div id="countdownText">3</div></section>
 
-    <section id="drawScreen" class="screen draw">
+    <section id="drawScreen" class="screen draw-screen">
       <header class="topbar">
         <div><p class="eyebrow">drawing phase</p><h2>Sketch what you hear</h2></div>
-        <div class="pill"><span id="drawProgress">1 / 10</span><b id="timerText">0.0s</b></div>
-        <div class="pill wide"><span id="listenText">Listen carefully</span><b id="activeBoxLabel">Box 1</b></div>
+        <div class="status-pills">
+          <div class="pill"><span id="drawProgress">1 / 10</span><b id="timerText">0.0s</b></div>
+          <div class="pill wide"><span id="listenText">Listen carefully</span><b id="activeBoxLabel">Box 1</b></div>
+        </div>
       </header>
       <div class="workspace">
         <aside class="tools">
-          <button id="penBtn" class="tool active">Pen</button>
-          <button id="eraserBtn" class="tool">Eraser</button>
-          <button id="clearBoxBtn" class="tool">Clear Box</button>
-          <button id="clearAllBtn" class="tool danger">Clear All</button>
-          <label class="range">Thickness <input id="thicknessRange" type="range" min="2" max="18" value="5" /></label>
+          <button id="penBtn" class="tool active" type="button" data-tool="pen">Pen</button>
+          <button id="eraserBtn" class="tool" type="button" data-tool="eraser">Eraser</button>
+          <button id="clearBoxBtn" class="tool" type="button">Clear Box</button>
+          <button id="clearAllBtn" class="tool danger" type="button">Clear All</button>
+          <label class="range">Thickness <input id="thicknessRange" type="range" min="1" max="100" value="25" /></label>
+          <div id="thicknessPreview" class="thickness-preview" aria-hidden="true"></div>
           <div id="palette" class="palette" aria-label="Pen colours"></div>
         </aside>
         <div id="canvasGrid" class="canvas-grid" aria-label="Drawing boxes"></div>
       </div>
     </section>
 
-    <section id="guessScreen" class="screen guess">
+    <section id="guessScreen" class="screen guess-screen">
       <header class="topbar compact">
         <div><p class="eyebrow">guessing phase</p><h2>Use your doodles to remember</h2></div>
-        <button id="submitBtn" class="primary small">Check Answers</button>
+        <button id="submitBtn" class="primary small" type="button">Check Answers</button>
       </header>
       <div class="guess-layout">
-        <div id="guessDrawingList" class="guess-drawings"></div>
-        <div id="answerList" class="answer-list"></div>
+        <div id="guessDrawingList" class="guess-drawings" aria-label="Your sketches"></div>
+        <form id="answerList" class="answer-list"></form>
       </div>
     </section>
 
-    <section id="resultScreen" class="screen result">
+    <section id="resultScreen" class="screen result-screen">
       <div class="result-card">
         <p class="eyebrow">results</p>
         <h2 id="resultTitle">Fantastic Recall</h2>
         <div class="score"><b id="scoreText">0 / 10</b><span id="percentText">0%</span></div>
         <div id="resultList" class="result-list"></div>
-        <div class="actions"><button id="playAgainBtn" class="primary">Play Again</button><button id="homeBtn" class="secondary">Home</button></div>
+        <div class="actions"><button id="playAgainBtn" class="primary" type="button">Play Again</button><button id="homeBtn" class="secondary" type="button">Home</button></div>
       </div>
     </section>
   </main>
