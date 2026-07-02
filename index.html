@@ -2,79 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Shorthand Sketch</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <button id="muteBtn" class="floating-mute" aria-label="Mute audio">🔊</button>
-
+  <button id="muteBtn" class="float-audio" aria-label="Toggle sound">🔊</button>
   <main class="app">
-    <section id="homeScreen" class="screen active home-screen">
-      <div class="hero-card">
-        <div class="logo-mark">✎</div>
-        <p class="eyebrow">Five-minute memory sketch game</p>
+    <section id="homeScreen" class="screen active home">
+      <div class="home-card">
+        <div class="logo">✎</div>
+        <p class="eyebrow">quick doodle memory game</p>
         <h1>Shorthand Sketch</h1>
         <p class="tagline">Can you remember what your own doodles mean?</p>
-        <p class="subcopy">Draw fast. Remember later.</p>
-
-        <div class="mode-row">
-          <button class="mode-btn selected" data-mode="classic">Classic</button>
-          <button class="mode-btn" data-mode="daily">Daily Challenge <span id="dailyDoneBadge"></span></button>
+        <p class="mini">Draw fast. Remember later.</p>
+        <div class="difficulty" id="difficultyPanel">
+          <button data-difficulty="easy">Easy <span>slower</span></button>
+          <button data-difficulty="normal" class="selected">Normal <span>balanced</span></button>
+          <button data-difficulty="hard">Hard <span>faster</span></button>
         </div>
-
-        <div class="difficulty-panel" id="difficultyPanel">
-          <button class="difficulty-btn" data-difficulty="easy">Easy<br><small>6–7 sec</small></button>
-          <button class="difficulty-btn selected" data-difficulty="normal">Normal<br><small>5–6 sec</small></button>
-          <button class="difficulty-btn" data-difficulty="hard">Hard<br><small>3–4 sec</small></button>
-        </div>
-
-        <button id="startBtn" class="primary-btn">Start Game</button>
-
-        <div class="stats-grid">
-          <div><strong id="gamesPlayed">0</strong><span>Games Played</span></div>
-          <div><strong id="bestScore">0</strong><span>Best Score</span></div>
-          <div><strong id="averageScore">0</strong><span>Average Score</span></div>
-          <div><strong id="dailyBest">0</strong><span>Daily Best</span></div>
+        <button id="startBtn" class="primary">Start Game</button>
+        <div class="stats">
+          <div><b id="gamesPlayed">0</b><small>Games Played</small></div>
+          <div><b id="bestScore">0</b><small>Best Score</small></div>
+          <div><b id="averageScore">0</b><small>Average Score</small></div>
         </div>
       </div>
     </section>
 
-    <section id="countdownScreen" class="screen countdown-screen">
-      <div id="countdownText" class="countdown-text">3</div>
-    </section>
+    <section id="countdownScreen" class="screen countdown"><div id="countdownText">3</div></section>
 
-    <section id="drawScreen" class="screen draw-screen">
-      <header class="game-header">
-        <div>
-          <p class="eyebrow">Drawing Phase</p>
-          <h2>Sketch what you hear</h2>
-        </div>
-        <div class="status-pill"><span id="drawProgress">1 / 10</span><strong id="timerText">0.0s</strong></div>
-        <div class="status-pill wide"><span id="listenText">Listen carefully</span><strong id="activeBoxLabel">Box 1</strong></div>
+    <section id="drawScreen" class="screen draw">
+      <header class="topbar">
+        <div><p class="eyebrow">drawing phase</p><h2>Sketch what you hear</h2></div>
+        <div class="pill"><span id="drawProgress">1 / 10</span><b id="timerText">0.0s</b></div>
+        <div class="pill wide"><span id="listenText">Listen carefully</span><b id="activeBoxLabel">Box 1</b></div>
       </header>
-
-      <div class="tool-bar">
-        <button class="tool-btn active" id="penBtn">Pen</button>
-        <button class="tool-btn" id="eraserBtn">Eraser</button>
-        <button class="tool-btn" id="undoBtn">Undo</button>
-        <button class="tool-btn" id="redoBtn">Redo</button>
-        <button class="tool-btn" id="clearBoxBtn">Clear Box</button>
-        <button class="tool-btn danger" id="clearAllBtn">Clear All</button>
-        <label class="slider-label">Thickness <input id="thicknessRange" type="range" min="2" max="18" value="5"></label>
-        <div class="palette" id="palette"></div>
+      <div class="workspace">
+        <aside class="tools">
+          <button id="penBtn" class="tool active">Pen</button>
+          <button id="eraserBtn" class="tool">Eraser</button>
+          <button id="clearBoxBtn" class="tool">Clear Box</button>
+          <button id="clearAllBtn" class="tool danger">Clear All</button>
+          <label class="range">Thickness <input id="thicknessRange" type="range" min="2" max="18" value="5" /></label>
+          <div id="palette" class="palette" aria-label="Pen colours"></div>
+        </aside>
+        <div id="canvasGrid" class="canvas-grid" aria-label="Drawing boxes"></div>
       </div>
-
-      <div id="canvasGrid" class="canvas-grid"></div>
     </section>
 
-    <section id="guessScreen" class="screen guess-screen">
-      <header class="game-header compact">
-        <div>
-          <p class="eyebrow">Guessing Phase</p>
-          <h2>What did your doodles mean?</h2>
-        </div>
-        <button id="submitBtn" class="primary-btn small">Check Answers</button>
+    <section id="guessScreen" class="screen guess">
+      <header class="topbar compact">
+        <div><p class="eyebrow">guessing phase</p><h2>Use your doodles to remember</h2></div>
+        <button id="submitBtn" class="primary small">Check Answers</button>
       </header>
       <div class="guess-layout">
         <div id="guessDrawingList" class="guess-drawings"></div>
@@ -82,20 +62,16 @@
       </div>
     </section>
 
-    <section id="resultScreen" class="screen result-screen">
+    <section id="resultScreen" class="screen result">
       <div class="result-card">
-        <p class="eyebrow">Results</p>
+        <p class="eyebrow">results</p>
         <h2 id="resultTitle">Fantastic Recall</h2>
-        <div class="score-big"><span id="scoreText">0 / 10</span><small id="percentText">0%</small></div>
+        <div class="score"><b id="scoreText">0 / 10</b><span id="percentText">0%</span></div>
         <div id="resultList" class="result-list"></div>
-        <div class="result-actions">
-          <button id="playAgainBtn" class="primary-btn">Play Again</button>
-          <button id="homeBtn" class="secondary-btn">Home</button>
-        </div>
+        <div class="actions"><button id="playAgainBtn" class="primary">Play Again</button><button id="homeBtn" class="secondary">Home</button></div>
       </div>
     </section>
   </main>
-
   <script src="script.js"></script>
 </body>
 </html>
