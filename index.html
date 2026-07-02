@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shorthand Sketch</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-blob blob-one"></div>
+  <div class="bg-blob blob-two"></div>
+  <div class="bg-blob blob-three"></div>
+
+  <button id="muteBtn" class="sound-fab" aria-label="Toggle sound">🔊</button>
+
+  <main class="app">
+    <section id="homeScreen" class="screen active">
+      <div class="home-card soft-pop">
+        <div class="doodle-dots" aria-hidden="true">✦</div>
+        <div class="brand-row">
+          <div class="logo" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div>
+            <p class="eyebrow">cosy quick-draw memory game</p>
+            <h1>Shorthand Sketch</h1>
+          </div>
+        </div>
+
+        <p class="tagline">Can you remember what your own doodles mean?</p>
+        <p class="description">Draw fast. Remember later. Hear ten everyday objects once, doodle them quickly, then type what each sketch meant.</p>
+
+        <div class="mode-switch" aria-label="Game mode">
+          <button id="classicModeBtn" class="chip selected" type="button">Classic Round</button>
+          <button id="dailyModeBtn" class="chip daily-chip" type="button">Daily Challenge <span id="dailyDot"></span></button>
+        </div>
+        <p id="dailyInfo" class="daily-info">A fresh shared list every day.</p>
+
+        <div id="difficultyPanel" class="difficulty-panel">
+          <p class="section-label">Choose difficulty</p>
+          <div class="difficulty-grid">
+            <button class="difficulty-card" data-difficulty="easy" type="button">
+              <strong>Easy</strong>
+              <span>6–7 seconds · slower voice</span>
+            </button>
+            <button class="difficulty-card" data-difficulty="normal" type="button">
+              <strong>Normal</strong>
+              <span>5–6 seconds · natural pace</span>
+            </button>
+            <button class="difficulty-card" data-difficulty="hard" type="button">
+              <strong>Hard</strong>
+              <span>3–4 seconds · faster pace</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="start-row">
+          <button id="startBtn" class="start-btn" type="button">Start Game</button>
+        </div>
+
+        <div class="stats-grid" aria-label="Statistics">
+          <div><strong id="gamesPlayed">0</strong><span>Games Played</span></div>
+          <div><strong id="bestScore">0</strong><span>Best Score</span></div>
+          <div><strong id="averageScore">0</strong><span>Average Score</span></div>
+          <div><strong id="dailyBest">0</strong><span>Daily Best</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="countdownScreen" class="screen countdown-screen">
+      <div id="countdownText" class="countdown-bubble">3</div>
+      <p class="countdown-caption">Ready your shorthand brain</p>
+    </section>
+
+    <section id="drawScreen" class="screen game-screen">
+      <header class="game-header">
+        <div>
+          <p class="eyebrow">drawing phase</p>
+          <h2>Sketch what you hear</h2>
+        </div>
+        <div class="round-pill"><span id="roundLabel">1 / 10</span><strong id="timerLabel">0.0s</strong></div>
+      </header>
+
+      <div class="announce-card">
+        <span id="announceText">Listen carefully. Each object is spoken once.</span>
+        <strong id="activeBoxLabel">Box 1</strong>
+      </div>
+
+      <div class="tool-panel" aria-label="Drawing tools">
+        <button id="penBtn" class="tool active" type="button">Pen</button>
+        <button id="eraserBtn" class="tool" type="button">Eraser</button>
+        <button id="undoBtn" class="tool" type="button">Undo</button>
+        <button id="redoBtn" class="tool" type="button">Redo</button>
+        <button id="clearBoxBtn" class="tool" type="button">Clear Box</button>
+        <button id="clearAllBtn" class="tool danger" type="button">Clear All</button>
+        <label class="slider-label">Thickness <input id="sizeSlider" type="range" min="2" max="18" value="5" /></label>
+        <div id="palette" class="palette" aria-label="Pen colour choices"></div>
+      </div>
+
+      <div id="canvasGrid" class="canvas-grid"></div>
+    </section>
+
+    <section id="guessScreen" class="screen guess-screen">
+      <header class="center-header">
+        <p class="eyebrow">memory phase</p>
+        <h2>What did your doodles mean?</h2>
+        <p class="description">The object names are hidden. Type your best guesses from memory.</p>
+      </header>
+      <form id="guessForm" class="guess-form">
+        <div id="guessGrid" class="guess-grid"></div>
+        <button id="submitBtn" class="start-btn" type="submit">Check Answers</button>
+      </form>
+    </section>
+
+    <section id="resultsScreen" class="screen results-screen">
+      <div class="results-card slide-up">
+        <p class="eyebrow">round complete</p>
+        <h2 id="resultTitle">Fantastic Recall</h2>
+        <div class="score-orb"><strong id="scoreText">0/10</strong><span id="percentText">0%</span></div>
+        <p id="resultMessage" class="description"></p>
+        <div id="answersList" class="answers-list"></div>
+        <div class="result-actions">
+          <button id="playAgainBtn" class="start-btn" type="button">Play Again</button>
+          <button id="homeBtn" class="secondary-btn" type="button">Home</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="volume-dock">
+    <label>Volume <input id="volumeSlider" type="range" min="0" max="1" step="0.05" value="0.55" /></label>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
